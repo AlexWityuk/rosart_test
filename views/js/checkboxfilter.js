@@ -19,6 +19,10 @@ $(document).ready(function(){
 	})
 
 	$('select[name="select_sort_product"]').on('change', function() {
+		var lastval = window.location.href.split("/")
+		console.log(lastval[lastval.length - 1]);
+		arr = [];
+		arr.push(lastval[lastval.length - 1]);
 		toPrice();
    	 	select_val = $(this).val();
    	 	submitAjax();
@@ -44,22 +48,18 @@ $(document).ready(function(){
  		e.preventDefault();
  		toPrice();
  		arr = [];
-		arr.push($(this).val());
+		var val_one = $(this).val();
+ 		toAddActive(val_one);
+		arr.push(val_one);
 		submitAjax();
  	});
-
+ 	
  	$('ul.navigation_dropDown li').on('click', function(e){
  		e.preventDefault();
  		toPrice();
  		arr = [];
  		var val_one = $(this).val();
- 		$('div.category_nav .button').each(function() {
- 			if ($(this).hasClass("active")) {
-				$(this).removeClass("active");
-				return false;
-			}
-		});
-		$('div.category_nav a[value=' + val_one + ']').addClass("active");
+ 		toAddActive(val_one);
 		arr.push(val_one);
 		submitAjax();
  	});
@@ -77,4 +77,13 @@ $(document).ready(function(){
         },"text");
 	}
 
+	function toAddActive(val_one){
+ 		$('div.category_nav .button').each(function() {
+ 			if ($(this).hasClass("active")) {
+				$(this).removeClass("active");
+				return false;
+			}
+		});
+		$('div.category_nav a[value=' + val_one + ']').addClass("active");
+ 	}
 });

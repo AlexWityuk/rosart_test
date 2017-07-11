@@ -7,7 +7,7 @@
 	<?php include('blocks/header.php'); ?>
 	<section class="catalog_page">
 		<div class="wrapper">
-			<div class="adb_picture" style="background-image: url(img/catalog_bg.jpg);"></div>
+			<div class="adb_picture" style="background-image: url(/views/img/catalog_bg.jpg);"></div>
 			<h1 class="title_">Каталог</h1>
 			<?php include('blocks/catalog_items.php'); ?>
 		</div>

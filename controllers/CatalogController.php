@@ -14,7 +14,7 @@ class CatalogController
         $product = new Product();
         $categoriesList = $category->getCategoriesList();
         $productsList = $product->getProductsList();
-        require_once(ROOT . '/views/category.php');
+        require_once(ROOT . '/views/catalog.php');
         return true;
     }
 

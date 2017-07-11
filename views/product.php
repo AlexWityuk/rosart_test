@@ -9,8 +9,9 @@
 		<div class="wrapper">
 			<ul class="breadcrumbs">
 				<li><a class="underscore" href="index.php">Главная</a></li>
-				<li><a class="underscore" href="catatlog.php">Каталог</a></li>
-				<li><a class="underscore" href="category.php">Живопись</a></li>
+				<li><a class="underscore" href="/catalog">Каталог</a></li>
+				<li><a class="underscore" href="/category/<?php echo $product['category_id']; ?>">
+					<?php echo $product['category']; ?></a></li>
 				<li><span>Название картины</span></li>
 			</ul>
 		</div>

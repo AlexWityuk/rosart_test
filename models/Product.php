@@ -67,7 +67,7 @@ class Product
     {
         $db = Db::getConnection();
 
-        $sql = 'SELECT p.id, p.name, p.price, p.date, p.url, '
+        $sql = 'SELECT p.id, p.name, p.price, p.date, p.url, p.category_id, '
             .'master.name as master, technika.name as technika, category.name as category '
             .'FROM product p '
             .'INNER JOIN categories master ON p.master = master.id '
