@@ -43,9 +43,9 @@
 					<li id="active_menu_3" class="dropDown">
 						<a href="/catalog">Каталог <i class="ic_arrow"></i></a>
 						<ul class="navigation_dropDown">
-							<li value="6"><a href="">Живопись</a></li>
-							<li value="7"><a href="">Графика</a></li>
-							<li value="8"><a href="">Изделия</a></li>
+							<li value="6"><a href="/category/6">Живопись</a></li>
+							<li value="7"><a href="/category/7">Графика</a></li>
+							<li value="8"><a href="/category/8">Изделия</a></li>
 						</ul>
 					</li>
 					<li id="active_menu_4"><a href="blog.php">Блог</a></li>

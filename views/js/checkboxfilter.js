@@ -2,6 +2,9 @@ $(document).ready(function(){
 
 	var arr = [];
 	var select_val = 'p.id ASC';
+	var lastval = window.location.href.split("/")
+		var id = lastval[lastval.length - 1];
+		arr.push(id);
 
 	$('.filterBody input[type="checkbox"]').on('change',function(){
 		toPrice();
@@ -19,10 +22,6 @@ $(document).ready(function(){
 	})
 
 	$('select[name="select_sort_product"]').on('change', function() {
-		var lastval = window.location.href.split("/")
-		console.log(lastval[lastval.length - 1]);
-		arr = [];
-		arr.push(lastval[lastval.length - 1]);
 		toPrice();
    	 	select_val = $(this).val();
    	 	submitAjax();
@@ -54,15 +53,15 @@ $(document).ready(function(){
 		submitAjax();
  	});
  	
- 	$('ul.navigation_dropDown li').on('click', function(e){
- 		e.preventDefault();
+ 	/*$('ul.navigation_dropDown li').on('click', function(e){
+ 		//e.preventDefault();
  		toPrice();
  		arr = [];
  		var val_one = $(this).val();
  		toAddActive(val_one);
 		arr.push(val_one);
 		submitAjax();
- 	});
+ 	});*/
 
  	function submitAjax(){
  		$.post('/ajax', {arr: arr, select_val: select_val}, function (data) { 
