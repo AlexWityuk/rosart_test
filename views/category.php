@@ -29,7 +29,7 @@
 					<div class="filterWrap isOpened">
 						<div class="filterHead">Все категории</div>
 						<ul class="filterBody">
-							<li><a href="/catalog">Все</a></li>
+							<li class="filter_category_all_list" value="all"><a href="">Все</a></li>
 							<?php foreach ($categoriesList as $category) { ?>
 							<li class="filter_category_all_list" value="<?php echo $category['id']; ?>">
 								<a href="">

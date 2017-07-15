@@ -36,11 +36,27 @@ class Product
             .'INNER JOIN categories master ON p.master = master.id '
             .'INNER JOIN categories technika ON p.technika = technika.id '
             .'INNER JOIN categories category ON p.category_id = category.id '
-            ."WHERE p.price BETWEEN $price_min AND $price_max "
-                    ."AND p.category_id IN ('$ids') "
-                    ."OR p.master IN ('$ids') "
-                    ."OR p.technika IN ('$ids')" 
-                    ."ORDER BY $select_val");
+            .'WHERE p.price BETWEEN 0 AND 20000 '
+                     .'AND p.technika IN ( '
+                                             .'SELECT technika '
+                                             .'FROM product '
+                                             .'WHERE product.technika IN( '
+                                                                  .'SELECT product.technika '
+                                                                  .'FROM product '
+                                                                  ."WHERE  product.master IN ('$ids') "
+                                                                      ."OR product.category_id IN ('$ids') "
+                                                                      ."OR product.technika IN ('$ids') GROUP BY technika)GROUP BY technika) "
+              .'AND p.master IN (SELECT master '
+                                                                  .'FROM product '
+                                                                  ."WHERE  product.master IN ('$ids') "
+                                                                      ."OR product.category_id IN ('$ids') "
+                                                                      ."OR product.technika IN ('$ids') GROUP BY master) "
+              .'AND p.category_id IN (SELECT category_id '
+                                                                  .'FROM product '
+                                                                  ."WHERE  product.master IN ('$ids') "
+                                                                      ."OR product.category_id IN ('$ids') "
+                                                                      ."OR product.technika IN ('$ids') GROUP BY category_id) "
+            ."ORDER BY $select_val");
         }
         
         $productsList = array();

@@ -17,6 +17,7 @@ $(document).ready(function(){
 			  return number != id;
 			});
 		}
+		console.log(arr);
 		submitAjax();
         return false;
 	})
@@ -48,8 +49,11 @@ $(document).ready(function(){
  		toPrice();
  		arr = [];
 		var val_one = $(this).val();
- 		toAddActive(val_one);
-		arr.push(val_one);
+		console.log(val_one);
+		if (val_one != 0){
+			toAddActive(val_one);
+			arr.push(val_one);
+		}
 		submitAjax();
  	});
  	
