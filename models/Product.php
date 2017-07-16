@@ -1,6 +1,7 @@
 <?php
 namespace models;
 use \components\Db;
+use \models\Category;
 /**
  * Класс Product - модель для работы с товарами
  */
@@ -11,9 +12,21 @@ class Product
      * @return array <p>Массив с товарами</p>
      */
     public function getProductsList($products_id = '', $select_val='p.id ASC', 
-                                    $price_min = '0', $price_max ='20000')
+                                    $price_min = '0', $price_max ='20000',
+                                    $master_flag = "false", 
+                                    $category_flag = "false", 
+                                    $technika_flag = "false")
     {
+
+        $category = new Category();
+        $all_id_cat = $category->getCategoriesId_All();
+        $all_id = array();
+        foreach ($all_id_cat as $value) {
+            $all_id[] = $value['id'];
+        }
+        $all_id = join("','",$all_id);
         $db = Db::getConnection();
+
         if (empty($products_id)) {
             $result = $db->query('SELECT p.id, p.name, p.price, p.date, p.url, '
             .'master.name as master, technika.name as technika, category.name as category '
@@ -30,33 +43,25 @@ class Product
                 //var_dump ($value);
             }
             $ids = join("','",$products_id);
+
+            if ($master_flag == "true") $str_master = "AND p.master IN ('$ids') ";
+            else $str_master = "AND p.master IN ('$all_id') ";
+            var_dump($str_master);
+            if ($category_flag == "true") $str_category = "AND p.category_id IN ('$ids') ";
+            else $str_category = "AND p.category_id IN ('$all_id') ";
+            var_dump($str_category);
+            if ($technika_flag == "true") $str_technia = "AND p.technika IN ('$ids') ";
+            else $str_technia = "AND p.technika IN ('$all_id') ";
+            var_dump($str_technia);
             $result = $db->query('SELECT p.id, p.name, p.price, p.date, p.url, '
             .'master.name as master, technika.name as technika, category.name as category '
             .'FROM product p '
             .'INNER JOIN categories master ON p.master = master.id '
             .'INNER JOIN categories technika ON p.technika = technika.id '
             .'INNER JOIN categories category ON p.category_id = category.id '
-            .'WHERE p.price BETWEEN 0 AND 20000 '
-                     .'AND p.technika IN ( '
-                                             .'SELECT technika '
-                                             .'FROM product '
-                                             .'WHERE product.technika IN( '
-                                                                  .'SELECT product.technika '
-                                                                  .'FROM product '
-                                                                  ."WHERE  product.master IN ('$ids') "
-                                                                      ."OR product.category_id IN ('$ids') "
-                                                                      ."OR product.technika IN ('$ids') GROUP BY technika)GROUP BY technika) "
-              .'AND p.master IN (SELECT master '
-                                                                  .'FROM product '
-                                                                  ."WHERE  product.master IN ('$ids') "
-                                                                      ."OR product.category_id IN ('$ids') "
-                                                                      ."OR product.technika IN ('$ids') GROUP BY master) "
-              .'AND p.category_id IN (SELECT category_id '
-                                                                  .'FROM product '
-                                                                  ."WHERE  product.master IN ('$ids') "
-                                                                      ."OR product.category_id IN ('$ids') "
-                                                                      ."OR product.technika IN ('$ids') GROUP BY category_id) "
-            ."ORDER BY $select_val");
+            ."WHERE p.price BETWEEN $price_min AND $price_max "
+                    ."$str_master" . "$str_category" . "$str_technia"
+                    ."ORDER BY $select_val");
         }
         
         $productsList = array();

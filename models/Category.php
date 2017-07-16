@@ -31,5 +31,24 @@ class Category{
         }
         return $categoryList;
     }
+
+    public function getCategoriesId_All(){
+        $db = Db::getConnection();
+
+        $sql = 'SELECT id FROM categories ORDER BY id ASC';
+        $result = $db->prepare($sql);
+
+        $result->setFetchMode(\PDO::FETCH_ASSOC);
+        
+        $result->execute();
+        
+        $i = 0;
+        $categoryList = array();
+        while ($row = $result->fetch()) {
+            $categoryList[$i]['id'] = $row['id'];
+            $i++;
+        }
+        return $categoryList;
+    }
 }
 
