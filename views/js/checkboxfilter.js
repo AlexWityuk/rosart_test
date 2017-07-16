@@ -119,9 +119,6 @@ $(document).ready(function(){
 				}
 			}
 		});
-		console.log('master_flag: ' + master_flag);
-		console.log('category_flag: ' + category_flag);
-		console.log('technika_flag: ' + technika_flag);
 	}
 
 	function toPrice(){

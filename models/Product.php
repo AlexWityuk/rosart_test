@@ -46,13 +46,10 @@ class Product
 
             if ($master_flag == "true") $str_master = "AND p.master IN ('$ids') ";
             else $str_master = "AND p.master IN ('$all_id') ";
-            var_dump($str_master);
             if ($category_flag == "true") $str_category = "AND p.category_id IN ('$ids') ";
             else $str_category = "AND p.category_id IN ('$all_id') ";
-            var_dump($str_category);
             if ($technika_flag == "true") $str_technia = "AND p.technika IN ('$ids') ";
             else $str_technia = "AND p.technika IN ('$all_id') ";
-            var_dump($str_technia);
             $result = $db->query('SELECT p.id, p.name, p.price, p.date, p.url, '
             .'master.name as master, technika.name as technika, category.name as category '
             .'FROM product p '
