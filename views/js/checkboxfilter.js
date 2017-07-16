@@ -1,14 +1,15 @@
 $(document).ready(function(){
-
+	toPrice();
 	var arr = [];
 	var master_flag = false;
 	var category_flag = false;
 	var technika_flag = false;
 	var select_val = 'p.id ASC';
 	var lastval = window.location.href.split("/")
-		var id = lastval[lastval.length - 1];
-		arr.push(id);
+	var id = lastval[lastval.length - 1];
+	arr.push(id);
 	checkboxChecked(id);
+	hecCategory ();
 
 	$('.filterBody input[type="checkbox"]').on('change',function(){
 		hecCategory ();
@@ -58,7 +59,6 @@ $(document).ready(function(){
  		toPrice();
  		arr = [];
 		var val_one = $(this).val();
-		console.log(val_one);
 		if (val_one != 0){
 			toAddActive(val_one);
 			arr.push(val_one);
@@ -121,13 +121,6 @@ $(document).ready(function(){
 		});
 	}
 
-	function toPrice(){
-		var pricemax = $( "#amount_to" ).val().split(' ')[0];
-		var pricemin = $( "#amount_from" ).val().split(' ')[0];
-		$.post('siteprice', {pricemax: pricemax, pricemin: pricemin}, function () { 
-        },"text");
-	}
-
 	function toAddActive(val_one){
  		$('div.category_nav .button').each(function() {
  			if ($(this).hasClass("active")) {
@@ -137,4 +130,11 @@ $(document).ready(function(){
 		});
 		$('div.category_nav a[value=' + val_one + ']').addClass("active");
  	}
+
+	function toPrice(){
+		var pricemax = $( "#amount_to" ).val().split(' ')[0];
+		var pricemin = $( "#amount_from" ).val().split(' ')[0];
+		$.post('/siteprice', {pricemax: pricemax, pricemin: pricemin}, function () { 
+        },"text");
+	}
 });

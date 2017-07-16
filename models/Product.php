@@ -17,7 +17,6 @@ class Product
                                     $category_flag = "false", 
                                     $technika_flag = "false")
     {
-
         $category = new Category();
         $all_id_cat = $category->getCategoriesId_All();
         $all_id = array();

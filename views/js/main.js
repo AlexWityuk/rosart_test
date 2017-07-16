@@ -139,6 +139,10 @@ $(document).ready(function(){
 		});
 		$( "#amount_from" ).val($( "#filter_price" ).slider( "values", 0)  + ' рубл.');
 		$( "#amount_to" ).val($( "#filter_price" ).slider( "values", 1)  + ' рубл.');
+		var pricemax = $( "#amount_to" ).val().split(' ')[0];
+		var pricemin = $( "#amount_from" ).val().split(' ')[0];
+		$.post('/siteprice', {pricemax: pricemax, pricemin: pricemin}, function () { 
+        },"text");
 	});
 
 

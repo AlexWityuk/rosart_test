@@ -14,8 +14,7 @@ class SiteController {
     }
     public function actionRaceprice(){     
         
-        $_SESSION['min_price'] = $_POST['pricemin'];
-        
+        $_SESSION['min_price'] = $_POST['pricemin'];     
         $_SESSION['max_price'] = $_POST['pricemax'];
 
     }
